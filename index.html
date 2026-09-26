@@ -1,56 +1,540 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Happy Birthday Card</title>
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <div class="body">
-      <div class="birthdayCard">
-        <div class="cardFront">
-          <img
-            src="https://github.com/DzarelDeveloper/Img/blob/main/ballon.png?raw=true"
-            class="balloons"
-            alt="balloons"
-          />
-          <img
-            src="https://github.com/DzarelDeveloper/Img/blob/main/hat.png?raw=true"
-            alt="bdHat"
-            class="bdHat"
-          />
-          <img
-                     src="cake.jpg"
-               alt="cake"
-               class="cake"
-               />
-          <img src="pfp2.jpeg" alt="Foto pasangan mu" class="taaImg" />
-          <h2 class="happy">Happy Birthday to Sandyy Kesayangan!!</h2>
-        </div>
-        <div class="cardInside">
-          <h3 class="back">HAPPY LEVEL UPP SUNDAY KESAYANGAN!!</h3>
-          <p>From Fia Imut nan Cakep</p>
-          <p>
-            happy level up day!!! Wish u all the best, Semoga kamu sehat selalu, semakin dewasa akan semakin banyak rintangan yang akan dihadapi but its okayy karena masii banyak orang yang sayang sama kamu terutama akuuu eaaaa, jangan lupa untuk bersyukur, terimakasii telah hadir di hidup dd eung love sekebon buat my kesayangan guweh aku mwhehe, be happy love🌷❤🎉🎂❤️🥂
-          </p>
-          <p>Selamat Ulangtahun</p>
-        </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Birthday Card</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      overflow-x: hidden;
+      font-family: "Poppins", "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at 15% 20%, rgba(255, 255, 255, .25), transparent 20%),
+        radial-gradient(circle at 85% 10%, rgba(255, 190, 220, .35), transparent 25%),
+        linear-gradient(135deg, #ff9ecf, #d9a7ff, #8fd3ff);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 35px 15px 45px;
+      position: relative;
+    }
+
+    /* Background glow */
+    body::before,
+    body::after {
+      content: "";
+      position: fixed;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      filter: blur(70px);
+      opacity: .35;
+      z-index: -1;
+      animation: glow 7s ease-in-out infinite alternate;
+    }
+
+    body::before {
+      background: #ff4fa3;
+      top: -100px;
+      left: -100px;
+    }
+
+    body::after {
+      background: #765cff;
+      right: -100px;
+      bottom: -100px;
+      animation-delay: 2s;
+    }
+
+    @keyframes glow {
+      from {
+        transform: scale(1);
+      }
+      to {
+        transform: scale(1.35);
+      }
+    }
+
+    /* Floating decorations */
+    .floating {
+      position: fixed;
+      pointer-events: none;
+      z-index: 0;
+      font-size: 25px;
+      animation: floatUp linear infinite;
+      opacity: .75;
+    }
+
+    .f1 { left: 8%;  bottom: -50px; animation-duration: 9s; }
+    .f2 { left: 22%; bottom: -70px; animation-duration: 12s; animation-delay: 2s; }
+    .f3 { left: 75%; bottom: -60px; animation-duration: 10s; animation-delay: 1s; }
+    .f4 { left: 90%; bottom: -80px; animation-duration: 13s; animation-delay: 4s; }
+    .f5 { left: 48%; bottom: -60px; animation-duration: 11s; animation-delay: 3s; }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
+      }
+      15% {
+        opacity: .8;
+      }
+      100% {
+        transform: translateY(-115vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    .body {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    /*
+      CARD
+    */
+    .birthdayCard {
+      width: min(90vw, 620px);
+      height: 420px;
+      position: relative;
+      perspective: 1800px;
+      filter: drop-shadow(0 25px 35px rgba(87, 38, 100, .28));
+    }
+
+    .cardFront,
+    .cardInside {
+      position: absolute;
+      inset: 0;
+      border-radius: 25px;
+      overflow: hidden;
+      backface-visibility: hidden;
+      transition: transform 1s cubic-bezier(.68, -0.55, .27, 1.55);
+    }
+
+    /*
+      FRONT
+    */
+    .cardFront {
+      background:
+        radial-gradient(circle at 50% 15%, rgba(255,255,255,.55), transparent 25%),
+        linear-gradient(145deg, #fff0f8, #ffd1e6 50%, #ffc1dc);
+      border: 3px solid rgba(255,255,255,.75);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: center;
+      padding: 25px;
+      transform-origin: left center;
+      z-index: 3;
+    }
+
+    .cardFront::before {
+      content: "";
+      position: absolute;
+      inset: 12px;
+      border: 2px dashed rgba(255, 105, 170, .35);
+      border-radius: 18px;
+      pointer-events: none;
+    }
+
+    /*
+      Balloon
+    */
+    .balloons {
+      position: absolute;
+      width: 150px;
+      left: 25px;
+      top: 15px;
+      filter: drop-shadow(0 8px 8px rgba(0,0,0,.12));
+      animation: balloon 3s ease-in-out infinite;
+    }
+
+    @keyframes balloon {
+      0%, 100% {
+        transform: rotate(-4deg) translateY(0);
+      }
+      50% {
+        transform: rotate(5deg) translateY(-8px);
+      }
+    }
+
+    /*
+      Birthday hat
+    */
+    .bdHat {
+      position: absolute;
+      width: 115px;
+      right: 35px;
+      top: 25px;
+      transform: rotate(12deg);
+      filter: drop-shadow(0 8px 7px rgba(0,0,0,.15));
+      animation: hat 2.7s ease-in-out infinite;
+    }
+
+    @keyframes hat {
+      0%, 100% {
+        transform: rotate(12deg) translateY(0);
+      }
+      50% {
+        transform: rotate(18deg) translateY(-7px);
+      }
+    }
+
+    /*
+      Cake
+    */
+    .cake {
+      width: 175px;
+      height: 145px;
+      object-fit: cover;
+      border-radius: 18px;
+      position: absolute;
+      top: 92px;
+      left: 50%;
+      transform: translateX(-50%);
+      border: 5px solid white;
+      box-shadow:
+        0 10px 25px rgba(255, 75, 160, .22),
+        0 0 0 6px rgba(255,255,255,.25);
+      transition: .4s ease;
+      z-index: 1;
+    }
+
+    .cake:hover {
+      transform: translateX(-50%) scale(1.06) rotate(-2deg);
+    }
+
+    /*
+      Couple image
+    */
+    .taaImg {
+      width: 105px;
+      height: 105px;
+      object-fit: cover;
+      border-radius: 50%;
+      position: absolute;
+      bottom: 74px;
+      left: 50%;
+      transform: translateX(-50%);
+      border: 5px solid white;
+      box-shadow:
+        0 7px 20px rgba(0,0,0,.18),
+        0 0 0 5px rgba(255, 127, 190, .18);
+      z-index: 2;
+      transition: .4s ease;
+    }
+
+    .taaImg:hover {
+      transform: translateX(-50%) scale(1.08);
+    }
+
+    /*
+      Happy title
+    */
+    .happy {
+      position: relative;
+      z-index: 4;
+      margin-top: auto;
+      margin-bottom: 5px;
+      padding: 11px 20px;
+      border-radius: 50px;
+      background: rgba(255,255,255,.72);
+      backdrop-filter: blur(8px);
+      color: #d52d79;
+      font-size: clamp(18px, 3.5vw, 28px);
+      text-align: center;
+      line-height: 1.25;
+      box-shadow: 0 8px 20px rgba(213,45,121,.13);
+      animation: titlePulse 2.5s ease-in-out infinite;
+    }
+
+    @keyframes titlePulse {
+      0%, 100% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.025);
+      }
+    }
+
+    /*
+      INSIDE
+    */
+    .cardInside {
+      background:
+        linear-gradient(rgba(255,255,255,.88), rgba(255,244,250,.96)),
+        repeating-linear-gradient(
+          0deg,
+          transparent,
+          transparent 28px,
+          rgba(255, 120, 180, .08) 29px
+        );
+      border: 3px solid rgba(255,255,255,.8);
+      padding: 35px;
+      transform: rotateY(180deg);
+      overflow-y: auto;
+    }
+
+    .birthdayCard:hover .cardFront {
+      transform: rotateY(-180deg);
+    }
+
+    .birthdayCard:hover .cardInside {
+      transform: rotateY(0);
+    }
+
+    .cardInside::before {
+      content: "♥";
+      position: absolute;
+      right: 20px;
+      top: 12px;
+      font-size: 45px;
+      color: rgba(255, 82, 157, .15);
+      transform: rotate(15deg);
+    }
+
+    .back {
+      text-align: center;
+      color: #d52d79;
+      font-size: clamp(19px, 3.5vw, 28px);
+      margin-bottom: 22px;
+      line-height: 1.3;
+      text-shadow: 0 2px 8px rgba(213,45,121,.12);
+    }
+
+    .cardInside p {
+      color: #633f55;
+      line-height: 1.75;
+      font-size: 15px;
+      margin-bottom: 17px;
+    }
+
+    .cardInside p:first-of-type {
+      text-align: right;
+      color: #d52d79;
+      font-weight: 700;
+      font-style: italic;
+    }
+
+    .cardInside p:last-of-type {
+      text-align: center;
+      font-size: 20px;
+      font-weight: 800;
+      color: #d52d79;
+      margin-top: 25px;
+    }
+
+    /*
+      AUDIO
+    */
+    audio {
+      width: min(90vw, 420px);
+      margin-top: 28px;
+      position: relative;
+      z-index: 3;
+      border-radius: 50px;
+      filter: drop-shadow(0 8px 15px rgba(85, 35, 90, .18));
+    }
+
+    /*
+      Small screen
+    */
+    @media (max-width: 600px) {
+      body {
+        padding-top: 25px;
+      }
+
+      .birthdayCard {
+        height: 500px;
+      }
+
+      .balloons {
+        width: 105px;
+        left: 12px;
+      }
+
+      .bdHat {
+        width: 85px;
+        right: 15px;
+      }
+
+      .cake {
+        width: 145px;
+        height: 120px;
+        top: 90px;
+      }
+
+      .taaImg {
+        width: 90px;
+        height: 90px;
+        bottom: 82px;
+      }
+
+      .happy {
+        font-size: 19px;
+        padding: 10px 14px;
+      }
+
+      .cardInside {
+        padding: 25px 22px;
+      }
+
+      .cardInside p {
+        font-size: 14px;
+      }
+    }
+
+    /*
+      Confetti
+    */
+    .confetti {
+      position: fixed;
+      top: -20px;
+      width: 9px;
+      height: 15px;
+      opacity: .8;
+      z-index: 1;
+      animation: confettiFall linear infinite;
+    }
+
+    .c1 { left: 7%;  background: #ff4f9a; animation-duration: 5s; }
+    .c2 { left: 18%; background: #ffd166; animation-duration: 6s; animation-delay: 1s; }
+    .c3 { left: 31%; background: #7bdff2; animation-duration: 4.5s; animation-delay: 2s; }
+    .c4 { left: 47%; background: #b28dff; animation-duration: 5.5s; animation-delay: .5s; }
+    .c5 { left: 62%; background: #ff8fab; animation-duration: 6.5s; animation-delay: 2s; }
+    .c6 { left: 76%; background: #ffe66d; animation-duration: 5s; animation-delay: 1.2s; }
+    .c7 { left: 91%; background: #6ee7b7; animation-duration: 7s; animation-delay: 3s; }
+
+    @keyframes confettiFall {
+      0% {
+        transform: translateY(-30px) rotate(0);
+      }
+      100% {
+        transform: translateY(110vh) rotate(720deg);
+      }
+    }
+
+    /*
+      Hint
+    */
+    .hint {
+      margin-top: 15px;
+      color: white;
+      font-size: 13px;
+      opacity: .9;
+      text-shadow: 0 2px 5px rgba(0,0,0,.2);
+      animation: hintBlink 2s ease-in-out infinite;
+    }
+
+    @keyframes hintBlink {
+      0%, 100% { opacity: .7; }
+      50% { opacity: 1; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Floating decorations -->
+  <div class="floating f1">💗</div>
+  <div class="floating f2">✨</div>
+  <div class="floating f3">🎈</div>
+  <div class="floating f4">💖</div>
+  <div class="floating f5">🌷</div>
+
+  <!-- Confetti -->
+  <div class="confetti c1"></div>
+  <div class="confetti c2"></div>
+  <div class="confetti c3"></div>
+  <div class="confetti c4"></div>
+  <div class="confetti c5"></div>
+  <div class="confetti c6"></div>
+  <div class="confetti c7"></div>
+
+  <div class="body">
+    <div class="birthdayCard">
+
+      <!-- FRONT -->
+      <div class="cardFront">
+
+        <img
+          src="https://github.com/DzarelDeveloper/Img/blob/main/ballon.png?raw=true"
+          class="balloons"
+          alt="balloons"
+        />
+
+        <img
+          src="https://github.com/DzarelDeveloper/Img/blob/main/hat.png?raw=true"
+          alt="bdHat"
+          class="bdHat"
+        />
+
+        <img
+          src="cake.jpg"
+          alt="cake"
+          class="cake"
+        />
+
+        <img
+          src="pfp2.jpeg"
+          alt="Foto pasangan mu"
+          class="taaImg"
+        />
+
+        <h2 class="happy">
+          Happy Birthday to Sandyy Kesayangan!!
+        </h2>
+
       </div>
+
+      <!-- INSIDE -->
+      <div class="cardInside">
+
+        <h3 class="back">
+          HAPPY LEVEL UPP SUNDAY KESAYANGAN!!
+        </h3>
+
+        <p>From Fia Imut nan Cakep</p>
+
+        <p>
+          happy level up day!!! Wish u all the best, Semoga kamu sehat selalu,
+          semakin dewasa akan semakin banyak rintangan yang akan dihadapi but
+          its okayy karena masii banyak orang yang sayang sama kamu terutama
+          akuuu eaaaa, jangan lupa untuk bersyukur, terimakasii telah hadir di
+          hidup dd eung love sekebon buat my kesayangan guweh aku mwhehe, be
+          happy love🌷❤🎉🎂❤️🥂
+        </p>
+
+        <p>
+          Selamat Ulangtahun
+        </p>
+
+      </div>
+
     </div>
-   </div> 
-    <br>
-    <p>
-   <p align="center">
-   <audio controls autoplay> 
-    <source src="hbd.mp4" type="audio/mp4"> Your browser does not support the audio element. 
-   </audio> </p>
-  </p>
-  </br>
-   <script src="script.js"></script>
- 
-  </body>
-</html>
-  
+  </div>
+
+  <div class="hint">
+  </div>
+
+  <audio controls autoplay loop>
+    <source src="hbd.mp3" type="audio/mp3">
+    Your browser does not support the audio element.
+  </audio>
+
 </body>
 </html>
+```
